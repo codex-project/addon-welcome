@@ -1,0 +1,23 @@
+{
+    "name": "codex/addon-welcome",
+    "type": "codex-addon",
+    "description": "The Welcome addon provides Codex its official welcome entry page.",
+    "keywords": ["laravel", "documentation", "docs", "markdown", "codex", "phpdoc"],
+    "homepage": "http://codex-project.ninja",
+    "authors": [{"name": "Robin Radic", "email": "robin@radic.nl"}],
+    "license": "MIT",
+    "require": {
+        "codex/composer-plugin": "~2.0",
+        "codex/core": "2.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Codex\\Addon\\Welcome\\": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
+}

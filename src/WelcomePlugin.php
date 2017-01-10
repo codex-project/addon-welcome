@@ -12,6 +12,7 @@ namespace Codex\Addon\Welcome;
 
 use Codex\Addons\Annotations as CA;
 use Codex\Addons\BasePlugin;
+use Codex\Documents\Document;
 
 /**
  * This is the class WelcomePlugin.
@@ -23,5 +24,51 @@ use Codex\Addons\BasePlugin;
  */
 class WelcomePlugin extends BasePlugin
 {
+    ## BasePlugin attributes
 
+    public $views = [
+        'welcome' => 'codex-welcome::welcome',
+    ];
+
+    ## ServiceProvider attributes
+
+    protected $configFiles = [ 'codex-welcome' ];
+
+    protected $viewDirs = [ 'views' => 'codex-welcome' ];
+
+    public function boot()
+    {
+        parent::boot();
+        $assetPath = asset('vendor/codex');
+        $ext       = config('app.debug') ? '.js' : '.min.js';
+        $this->hook('controller:welcome', function ($controller) use ($assetPath, $ext) {
+            $this->codex()->theme
+                ->addStylesheet('codex.page.welcome', $assetPath . '/styles/codex.page.welcome.css', [ 'codex' ])
+                ->addJavascript('wowjs', $assetPath . '/vendor/wowjs/wow' . $ext)
+                ->addJavascript('codex.page.welcome', $assetPath . '/js/codex.page.welcome.js', [ 'codex', 'wowjs' ])
+                ->addScript('init', <<<EOT
+var app = new codex.App({
+    el: '#app'
+})
+EOT
+                );
+        });
+    }
+
+    public function register()
+    {
+        $app = parent::register();
+
+        if ( $app[ 'config' ]->get('codex-welcome.http.enabled', false) ) {
+            $this->registerHttp();
+        }
+
+
+        return $app;
+    }
+
+    protected function registerHttp()
+    {
+        $this->app->register(Http\HttpServiceProvider::class);
+    }
 }

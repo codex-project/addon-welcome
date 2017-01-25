@@ -1,5 +1,7 @@
 @extends(codex()->view('layout'))
-
+@push('head')
+    {!! app('codex.web-app-manifest')->generateLink();  !!}
+@endpush
 @section('body')
     
     <!--[if lt IE 10]>
@@ -120,39 +122,91 @@
                     <div class="col-md-5 pull-md-7 text-center"><img src="{{ asset('vendor/codex') }}/img/ss-codex-phpdoc.png" alt="Codex PHPDoc" data-wow-delay="0.30s" data-wow-duration="1.5s" class="feature-image img-fluid mx-auto wow fadeIn"></div>
                 </div>
             </c-section>
+
             <!-- FEATURES 2-->
-            <c-section id="documentation" scheme="light" class="scrollspy wow fadeIn">
+            <c-section class="scrollspy wow fadeIn" id="getting-started" scheme="light">
+                <header>
+                    <h2 class="section-title">Getting Started</h2>
+                    <hr>
+                </header>
+                <div class="row">
+                    <div class="col-md-9">
+                        <h3>Composer</h3>
+                        <p>Installation using composer</p>
+                        <h4>Stable Release</h4>
+                        <p>This is the preferred release if you're looking to use Codex for your documentation needs.</p>
+                        <pre class="language-bash"><code>composer create-project codex/codex [directory] --stability=stable</code></pre>
+                        <h4>Dev Release</h4>
+                        <p>As this is an open source project, you are free to download the development branch as well. Just please note that while this is the bleeding edge in terms of features and functionality, it comes at the price that things may be broken.</p>
+                        <pre class="language-bash"><code>composer create-project codex/codex [directory] --stability=dev</code></pre>
+                        <h4>Integrate Codex</h4>
+                        <p>Tbd</p>
+                        <pre class="language-bash"><code>composer require codex/core</code></pre>
+                    </div>
+                    <div class="col-md-2">
+                        <h3>Download</h3><a class="btn btn-block btn-success" href="#">Latest Stable Release</a><a class="btn btn-block btn-warning" href="#">Latest Dev Release</a><a class="btn btn-block btn-light" href="#">Legacy (v1.x)</a>
+                    </div>
+                </div>
+            </c-section>
+            <c-section class="scrollspy wow fadeIn" id="documentation" scheme="dark">
                 <header>
                     <h2 class="section-title">Documentation</h2>
                     <hr>
                 </header>
                 <div class="row">
-                    <div class="col-md-7">
-                        <p class="lead">Codex is very well documented</p>
-                    </div>
-                    <div class="col-md-5"><a href="{{ route('codex.document') }}" class="btn btn-primary btn-big">Codex Documentation</a></div>
+                    <div class="col-md-4"><a class="btn btn-success btn-block" href="{{ route('codex.document') }}">Latest Stable Version</a></div>
+                    <div class="col-md-4"><a class="btn btn-warning btn-block" href="{{ route('codex.document') }}">Latest Dev Version</a></div>
+                    <div class="col-md-4"><a class="btn btn-dark btn-block" href="{{ route('codex.document', ['project' => 'codex', 'ref' => 'v1']) }}">Legacy (v1.x)</a></div>
                 </div>
             </c-section>
-        </div>
-
-        <c-footer ref="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h3>Navigation</h3>
-                        <ul>
-                            @include('codex-welcome::partials.welcome-nav-items')
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <h3>Social</h3>
-                    </div>
-                    <div class="col-md-4">
-                        <h3>Related</h3>
+            <c-footer ref="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 class="section-title">Navigation</h4>
+                            <hr class="section-title-divider">
+                            <ul class="nav nav-footer">
+                                <li class="nav-item"><a class="nav-link" href="#welcome" v-scroll-to:href="{ offset: -50 }">Welcome</a></li>
+                                <!--li.nav-item: a.nav-link(href='#open-source', v-scroll-to:href='{ offset: -50 }') Open Source-->
+                                <li class="nav-item"><a class="nav-link" href="#features" v-scroll-to:href="{ offset: -50 }">Features</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#overview" v-scroll-to:href="{ offset: -50 }">Overview</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#documentation" v-scroll-to:href="{ offset: -50 }">Documentation</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="section-title">Social</h4>
+                            <hr class="section-title-divider">
+                            <ul class="nav nav-footer-social">
+                                <li class="nav-item"><a class="nav-link" href="#welcome" v-scroll-to:href="{ offset: -50 }"><i class="fa fa-github"></i></a></li>
+                                <li class="nav-item"><a class="nav-link" href="#welcome" v-scroll-to:href="{ offset: -50 }"><i class="fa fa-facebook"></i></a></li>
+                                <li class="nav-item"><a class="nav-link" href="#welcome" v-scroll-to:href="{ offset: -50 }"><i class="fa fa-google-plus"></i></a></li>
+                                <li class="nav-item"><a class="nav-link" href="#welcome" v-scroll-to:href="{ offset: -50 }"><i class="fa fa-twitter"></i></a></li>
+                                <li class="nav-item"><a class="nav-link" href="#welcome" v-scroll-to:href="{ offset: -50 }"><i class="fa fa-slack"></i></a></li>
+                                <li class="nav-item"><a class="nav-link" href="#welcome" v-scroll-to:href="{ offset: -50 }"><i class="fa fa-linkedin"></i></a></li>
+                                <li class="nav-item"><a class="nav-link" href="#welcome" v-scroll-to:href="{ offset: -50 }"><i class="fa fa-youtube"></i></a></li>
+                                <li class="nav-item"><a class="nav-link" href="#welcome" v-scroll-to:href="{ offset: -50 }"><i class="fa fa-pinterest-p"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="section-title">Related</h4>
+                            <hr class="section-title-divider">
+                            <ul class="nav nav-footer">
+                                <li class="nav-item"><a class="nav-link" href="#welcome" v-scroll-to:href="{ offset: -50 }">Packagist</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#welcome" v-scroll-to:href="{ offset: -50 }">NPM</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#welcome" v-scroll-to:href="{ offset: -50 }">MIT License</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#welcome" v-scroll-to:href="{ offset: -50 }">Contributing</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </c-footer>
+                <div class="copyright">
+                    <div class="container">
+                        <div class="row">
+                            <p>copyright codex 2017</p>
+                        </div>
+                    </div>
+                </div>
+            </c-footer>
         <c-scroll-to-top></c-scroll-to-top>
     </c-theme>
 </div>

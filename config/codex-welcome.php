@@ -10,6 +10,17 @@
  */
 
 return [
+    'web-app-manifest' => [
+        'path' => public_path('manifest.webmanifest'),
+        'overrides' => [
+            'shortname' => 'codex',
+            'scope' => '/',
+            'description' => 'Codex is a file-based documentation platform built on top of Laravel. It\'s completely customizable and dead simple to use to create beautiful documentation.',
+            'icons' => [
+
+            ]
+        ]
+    ],
     'http' => [
         'enabled' => env('CODEX_WELCOME_ENABLED', true),
         'uri' => env('CODEX_WELCOME_URI', '/'),

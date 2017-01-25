@@ -38,7 +38,7 @@ class WelcomePlugin extends BasePlugin
 
     public function boot()
     {
-        parent::boot();
+        $app = parent::boot();
         $assetPath = asset('vendor/codex');
         $ext       = config('app.debug') ? '.js' : '.min.js';
         $this->hook('controller:welcome', function ($controller) use ($assetPath, $ext) {
@@ -55,9 +55,23 @@ EOT
         });
     }
 
+    public function booted()
+    {
+        /** @var WebAppManifestHelper $manifest */
+        $manifest = $this->app['codex.web-app-manifest'];
+        if(false === $manifest->exists()){
+            $manifest->generateFile();
+        }
+
+    }
+
     public function register()
     {
         $app = parent::register();
+
+        $app->singleton('codex.web-app-manifest', function($app) {
+            return new WebAppManifestHelper(config('codex-welcome.web-app-manifest.path'));
+        });
 
         if ( $app[ 'config' ]->get('codex-welcome.http.enabled', false) ) {
             $this->registerHttp();

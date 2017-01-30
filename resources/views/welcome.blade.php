@@ -23,12 +23,12 @@
             <!-- CAROUSEL / SLIDER-->
             <c-section id="welcome" :full-width="true" class="scrollspy c-section-light">
                 <c-carousel ref="carousel" :height="carouselHeight" :interval="5500" :controls="true" control-bottom="#open-source" :indicators="false" class="scrollspy">
-                    <c-carousel-item img="{{ asset('vendor/codex') }}/img/screen-typewriter.jpg">
+                    <c-carousel-item img="{{ asset('vendor/codex') }}/img/slides/slide-typewriter.jpg">
                         <div class="carousel-caption">
                             <p>Completely customizable and dead simple to use to create beautiful documentation.</p>
                         </div>
                     </c-carousel-item>
-                    <c-carousel-item img="{{ asset('vendor/codex') }}/img/screen-html.png">
+                    <c-carousel-item img="{{ asset('vendor/codex') }}/img/slides/slide-html.png">
                         <div class="carousel-caption">
                             <p>Seamless integration of PHPDoc, Github/Bitbucket and more!</p>
                         </div>

@@ -3,7 +3,7 @@
     {!! app('codex.web-app-manifest')->generateLink();  !!}
 @endpush
 @section('body')
-    
+
     <!--[if lt IE 10]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -159,7 +159,8 @@
                     <div class="col-md-4"><a class="btn btn-dark btn-block" href="{{ route('codex.document', ['project' => 'codex', 'ref' => 'v1']) }}">Legacy (v1.x)</a></div>
                 </div>
             </c-section>
-            <c-footer ref="footer">
+        </div>
+        <c-footer ref="footer">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4">

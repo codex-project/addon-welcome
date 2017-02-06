@@ -40,13 +40,14 @@ class WelcomePlugin extends BasePlugin
     {
         $app = parent::boot();
         $assetPath = asset('vendor/codex');
-        $ext       = config('app.debug') ? '.js' : '.min.js';
+        $ext       = config('app.debug', false) ? '.js' : '.min.js';
         $this->hook('controller:welcome', function ($controller) use ($assetPath, $ext) {
             $this->codex()->theme
                 ->addStylesheet('codex.page.welcome', $assetPath . '/styles/codex.page.welcome.css', [ 'codex' ])
                 ->addJavascript('wowjs', $assetPath . '/vendor/wowjs/wow' . $ext)
                 ->addJavascript('codex.page.welcome', $assetPath . '/js/codex.page.welcome.js', [ 'codex', 'wowjs' ])
                 ->addScript('init', <<<EOT
+                Vue.use(CodexPlugin);
 var app = new codex.App({
     el: '#app'
 })
